@@ -64,7 +64,7 @@ export default class EditScreen extends Component {
         .catch(error=>console.log(error))     
         } 
     } 
-    //setSearchResult=(temp)=>{}
+
     createTwoButtonAlert = () =>
     Alert.alert(
       "Alert Title",
@@ -79,6 +79,7 @@ export default class EditScreen extends Component {
       ],
       { cancelable: false }
     );
+
     commitEdit=()=>{
         const temp=this.state.dataSource.filter(function(item){
             if(item.name==tuser.name)
@@ -94,18 +95,15 @@ export default class EditScreen extends Component {
         this.setState({
             submitted:true
         })
-        fetch('https://my-json-server.typicode.com/SadhanaSrinivasan/JSONServer/users', {/*headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },*/
+        fetch('https://my-json-server.typicode.com/SadhanaSrinivasan/JSONServer/users', {
             method: 'POST',
             body: JSON.stringify({
                 firstParam:this.state.dataSource,
-                //secondParam: 'yourOtherValue',
             }),
         });
         console.log("submitted")
     }
+
     tryingMap=()=>{
             const tempname=this.state.name;
             const temp=this.state.dataSource.filter(function(item){
@@ -122,6 +120,13 @@ export default class EditScreen extends Component {
         })
         console.log("Hi after setting serch result, search result is ",this.state.searchResult,this.state.buttonPressed)
     }
+
+    renderItem=(data)=>
+        <TouchableOpacity>
+            <Spacer>
+            <Text>{data.item.name} || {data.item.dob} || {data.item.gender} || {data.item.experience}</Text>
+            </Spacer>
+        </TouchableOpacity>
        
     render(){
         if(this.state.loading){//Case 1 when data is being collected for wait symbol
@@ -155,8 +160,8 @@ export default class EditScreen extends Component {
                     return(
                         <View>
                             <Spacer><Text style={{fontSize:20, margin:10}}>Please edit the values you wish to change</Text></Spacer> 
-                            <Spacer><Input placeholderTextColor="red" label="Id" placeholder={tuser.name} onChangeText={inputSetName}></Input></Spacer>
-                            <Spacer><Input label="Date of Biirth" placeholder={tuser.dob} onChangeText={inputSetDob}></Input></Spacer>
+                            <Spacer><Input label="Name" placeholder={tuser.name} onChangeText={inputSetName}></Input></Spacer>
+                            <Spacer><Input label="Date of Birth" placeholder={tuser.dob} onChangeText={inputSetDob}></Input></Spacer>
                             <Spacer><Input label="Gender:" placeholder={tuser.gender} onChangeText={inputSetGender}></Input></Spacer>
                             <Spacer><Input label="Experience:" placeholder={tuser.experience} onChangeText={inputSetExperience}></Input></Spacer>
                             <TouchableOpacity 
@@ -175,7 +180,23 @@ export default class EditScreen extends Component {
         return (//normal first  screen
         <View>
         <TextInput label="Name" placeholder="Enter Name Here" onChangeText={this.handleName} onSubmitEditing={this.finalName} style={styles.input}/>
-        <Button title="Click to Find User" onPress={this.tryingMap}/>    
+        <Text style={{fontSize:18, color:'rgb(84, 190, 160)', fontWeight:'bold', textAlign:'center'}}>Current List of Users:</Text>
+        <FlatList 
+                        data={this.state.dataSource}
+                        renderItem={item=>this.renderItem(item)}
+                        keyExtractor={item=>item.name}        
+                    ></FlatList> 
+        <TouchableOpacity 
+            style={styles.button}
+            onPress={this.tryingMap}
+        >
+                <Text style={{
+                    fontSize:20,
+                    color:'white',
+                    padding:10,
+                    textAlign:'center'}}>
+                        Select User to Edit</Text>
+        </TouchableOpacity>
         </View>
         )
     }

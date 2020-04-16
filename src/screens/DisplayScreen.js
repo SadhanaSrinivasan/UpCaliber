@@ -23,8 +23,8 @@ export default class DisplayScreen extends Component {
             this.setState({
                 loading:false,
                 dataSource:json
-                //console.log(dataSource)
-            })    
+            })   
+            console.log("Hey sadhs this iw what orues earching for",this.state.dataSource) 
         })
         .catch(error=>console.log(error))
         } 

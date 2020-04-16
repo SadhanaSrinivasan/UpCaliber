@@ -109,7 +109,17 @@ export default class SearchScreen extends Component {
         <View>
         <TextInput label="Name" placeholder="Enter Name Here" onChangeText={this.handleName} onSubmitEditing={this.finalName} style={styles.input}/>
   
-        <Button title="Click to Find User" onPress={this.tryingMap}/>    
+        <TouchableOpacity 
+            style={styles.button}
+            onPress={this.tryingMap}
+        >
+                <Text style={{
+                    fontSize:20,
+                    color:'white',
+                    padding:10,
+                    textAlign:'center'}}>
+                        Search</Text>
+        </TouchableOpacity>   
             
         </View>
         )
@@ -123,5 +133,20 @@ const styles=StyleSheet.create({
         borderColor: '#736C6C',
         borderWidth: 1,
         padding:10
-     }
+     },button:{
+        margin:20,
+        backgroundColor:'rgb(84, 190, 160)',
+        textAlign:"center",
+        fontSize:12,
+        alignSelf:"center",
+        height:70,
+        width:300,
+        alignItems :'center',
+        padding:10
+    },
+    textButton:{
+        fontSize:20,
+        color:'white',
+        padding:10
+        }
 });

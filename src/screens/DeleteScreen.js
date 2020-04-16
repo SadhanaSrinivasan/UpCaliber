@@ -114,7 +114,7 @@ export default class DeleteScreen extends Component {
         console.log("Hi after setting serch result, search result is ",this.state.searchResult,this.state.buttonPressed)
     }
     renderItem=(data)=>
-        <TouchableOpacity style={styles.list}>
+        <TouchableOpacity>
             <Spacer>
             <Text>{data.item.name} || {data.item.dob} || {data.item.gender} || {data.item.experience}</Text>
             </Spacer>
@@ -195,7 +195,7 @@ export default class DeleteScreen extends Component {
                         Select User</Text>
         </TouchableOpacity>
         {//<Button title="Click to Find User to delete" onPress={this.tryingMap}/>    
-    }
+        }
         </View>
         )
     }

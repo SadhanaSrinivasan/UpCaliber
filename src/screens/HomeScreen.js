@@ -37,10 +37,8 @@ const HomeScreen=({navigation})=>{
         >
                 <Text style={styles.text} >Display All Records</Text>
         </TouchableOpacity>
-        <Button title="Temporary Search Screen"  onPress={()=>navigation.navigate('tempSearch')}></Button>
-        {//<Button title="Temporary Screen"  onPress={()=>navigation.navigate('Temp')}></Button>
-        }
-        </View>
+        {//<Button title="Temporary Search Screen"  onPress={()=>navigation.navigate('tempSearch')}></Button> //REFERENCE IS STILL THERE IN APP.JS TO THIS  INCASE YOU WANT TO SEE SEARCHBAR
+        }</View>
 };
 
 const styles=StyleSheet.create({
